@@ -144,6 +144,11 @@ async function handleEmbeddings (req, apiKey) {
 
 const DEFAULT_MODEL = "gemini-2.5-flash";
 async function handleCompletions (req, apiKey) {
+  // gpt-4o 映射 gemini-2.5-pro
+  if (req.model === 'gpt-4o') {
+    req.model = 'gemini-2.5-pro';
+    console.log(`[Model Remap] Intercepted 'gpt-4o' and remapped to 'gemini-2.5-pro'.`);
+  }
   let model;
   switch (true) {
     case typeof req.model !== "string":
